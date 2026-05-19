@@ -79,7 +79,7 @@ const OurProduct = () => {
         <h3 className="text-[45px] font-bold text-text-base uppercase">
           new drops
         </h3>
-        <p className="text-[25px] font-normal leading-[150%] text-text-secondary w-2/3">
+        <p className="text-[22px] font-normal leading-[150%] text-text-secondary w-2/3">
           Stand out with our latest collection—bold designs, premium fabrics,
           and street-ready fits. Once they’re gone, they’re gone. Don’t miss
           out!

@@ -111,7 +111,7 @@ export function HeroSection() {
                     ease: "linear",
                   }}
                 />
-                <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/40 to-transparent" />
+                <div className="absolute inset-0 bg-linear-to-r from-black/80 via-black/40 to-transparent" />
                 <div className="absolute inset-0 bg-black/20" />
               </div>
 
@@ -185,7 +185,7 @@ export function HeroSection() {
               onClick={() => scrollTo(index)}
               className="flex-1 group text-left transition-all relative"
             >
-              <div className="absolute -top-[25px] left-0 h-[2px] w-full overflow-hidden">
+              <div className="absolute top-[-25px] left-0 h-[2px] w-full overflow-hidden">
                 {current === index ? (
                   <motion.div
                     key={`progress-${index}-${tick}`}

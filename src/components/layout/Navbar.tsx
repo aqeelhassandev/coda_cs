@@ -93,7 +93,7 @@ export function Navbar() {
   return (
     <div className="flex items-center  ">
       <NavigationMenu className="mx-auto max-w-[1200px] p-[20px_40px] ">
-        <NavigationMenuList className="justify-start text-[25px] font-bold text-[#121212]">
+        <NavigationMenuList className="justify-start text-[25px] font-bold text-text-base">
           CODACS
         </NavigationMenuList>
 
