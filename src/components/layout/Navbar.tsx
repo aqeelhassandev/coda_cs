@@ -1,5 +1,8 @@
 import * as React from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
+import { motion, AnimatePresence } from "framer-motion";
+import { Menu01Icon, Cancel01Icon } from "@hugeicons/core-free-icons";
 
 import {
   NavigationMenu,
@@ -91,20 +94,22 @@ const Links: Links[] = [
 
 export function Navbar() {
   return (
-    <div className="flex items-center  ">
-      <NavigationMenu className="mx-auto max-w-[1200px] p-[20px_40px] ">
-        <NavigationMenuList className="justify-start text-[25px] font-bold text-text-base">
+    <div className="flex items-center w-full">
+      <NavigationMenu className="mx-auto w-full max-w-[1200px] p-4 md:p-[20px_40px] flex flex-col sm:flex-row items-center justify-between gap-4">
+        <NavigationMenuList className="justify-center sm:justify-start text-[25px] font-bold text-text-base">
           CODACS
         </NavigationMenuList>
 
-        <NavigationMenuList className="justify-end ">
+        <NavigationMenuList className="justify-center sm:justify-end flex-wrap gap-1 sm:gap-2">
           {Links.map((link) => (
             <NavigationMenuItem key={link.title}>
               {link.items && link.items.length > 0 ? (
                 <>
-                  <NavigationMenuTrigger className="text-[16px]">{link.title}</NavigationMenuTrigger>
+                  <NavigationMenuTrigger className="text-xs sm:text-sm md:text-base px-2 py-1.5 md:px-4.5">
+                    {link.title}
+                  </NavigationMenuTrigger>
                   <NavigationMenuContent>
-                    <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px] ">
+                    <ul className="grid w-[300px] sm:w-[400px] gap-2 p-3 sm:gap-3 sm:p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px] ">
                       {link.items.map((item) => (
                         <ListItem
                           key={item.title}
@@ -119,7 +124,7 @@ export function Navbar() {
                 </>
               ) : (
                 <NavigationMenuLink
-                  className={navigationMenuTriggerStyle()}
+                  className={`${navigationMenuTriggerStyle()} !text-xs sm:!text-sm md:!text-base !px-2 md:!px-4.5`}
                   render={<Link to={link.to}>{link.title}</Link>}
                 />
               )}

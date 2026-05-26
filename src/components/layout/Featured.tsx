@@ -72,7 +72,7 @@ const CarouselControls = () => {
   const { scrollPrev, scrollNext } = useCarousel();
 
   return (
-    <div className="mx-auto w-[1200px] flex gap-3 mt-6 pl-2">
+    <div className="mx-auto w-full max-w-[1200px] flex gap-3 mt-6 px-4 sm:px-6 pl-2">
       <button
         onClick={scrollPrev}
         className="flex items-center justify-center w-12 h-12 rounded-full bg-black text-white hover:bg-black/85 active:scale-95 transition-all duration-200 cursor-pointer shadow-md"
@@ -94,11 +94,11 @@ const CarouselControls = () => {
 const Featured = () => {
   return (
     <div className="w-full h-full mt-[106px] mb-[36px]">
-      <div className="mx-auto w-[1200px] flex gap-[20px] flex-col">
-        <h3 className="text-[40px] font-bold text-text-base uppercase w-[70%]">
+      <div className="mx-auto w-full max-w-[1200px] flex gap-[20px] flex-col px-4 sm:px-6">
+        <h3 className="text-[28px] sm:text-[40px] font-bold text-text-base uppercase w-full md:w-[70%]">
           Featured Drops: Stand Out, Stay Ahead
         </h3>
-        <p className="text-[21px] font-normal leading-[150%] text-text-secondary w-2/3">
+        <p className="text-[18px] sm:text-[21px] font-normal leading-[150%] text-text-secondary w-full md:w-2/3">
           Exclusive designs, premium materials, and street-ready vibes—these
           must-have pieces are setting the trend. Get yours before they’re gone!
         </p>

@@ -94,7 +94,7 @@ export function HeroSection() {
   );
 
   return (
-    <div className=" h-[800px] overflow-hidden rounded-[40px] relative bg-neutral-900">
+    <div className="h-[500px] sm:h-[650px] md:h-[800px] overflow-hidden rounded-[40px] relative bg-neutral-900">
       <Carousel setApi={setApi} className="w-full h-full" opts={{ loop: true }}>
         <CarouselContent className="h-full ml-0">
           {slides.map((slide, index) => (
@@ -115,7 +115,7 @@ export function HeroSection() {
                 <div className="absolute inset-0 bg-black/20" />
               </div>
 
-              <div className="relative h-full flex flex-col justify-end px-16 pb-50">
+              <div className="relative h-full flex flex-col justify-end px-6 md:px-16 pb-18 sm:pb-42 md:pb-50">
                 <AnimatePresence mode="wait">
                   {current === index && (
                     <motion.div
@@ -130,7 +130,7 @@ export function HeroSection() {
                         initial={{ opacity: 0, y: 40 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: 0.15, duration: 0.6 }}
-                        className="text-white text-5xl font-bold leading-[1.1] tracking-tight"
+                        className="text-white text-3xl sm:text-4xl md:text-5xl font-bold leading-[1.1] tracking-tight"
                       >
                         {slide.title}
                       </motion.h1>
@@ -139,7 +139,7 @@ export function HeroSection() {
                         initial={{ opacity: 0, y: 30 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: 0.3, duration: 0.6 }}
-                        className="text-gray-300 text-lg max-w-md font-light leading-relaxed"
+                        className="text-gray-300 text-sm sm:text-base md:text-lg max-w-md font-light leading-relaxed line-clamp-2 sm:line-clamp-none"
                       >
                         {slide.description}
                       </motion.p>
@@ -149,7 +149,7 @@ export function HeroSection() {
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: 0.45, duration: 0.6 }}
                       >
-                        <Button className="relative overflow-hidden bg-white text-black rounded-full px-5 py-6 flex items-center gap-3 text-base font-medium group cursor-pointer">
+                        <Button className="relative overflow-hidden bg-white text-black rounded-full px-5 py-5 sm:py-6 flex items-center gap-3 text-sm sm:text-base font-medium group cursor-pointer">
                           {/* Animated Background */}
                           <span className="absolute inset-0 bg-black scale-x-0 origin-left transition-transform duration-700 ease-out group-hover:scale-x-100 rounded-full" />
 
@@ -177,15 +177,15 @@ export function HeroSection() {
         </CarouselContent>
       </Carousel>
 
-      <div className="absolute bottom-10 left-0 right-0 px-16">
-        <div className="flex gap-4 w-full border-t border-white/20 pt-6">
+      <div className="absolute bottom-6 md:bottom-10 left-0 right-0 px-6 md:px-16">
+        <div className="flex gap-4 w-full border-t border-white/20 pt-4 md:pt-6">
           {slides.map((slide, index) => (
             <button
               key={index}
               onClick={() => scrollTo(index)}
               className="flex-1 group text-left transition-all relative"
             >
-              <div className="absolute top-[-25px] left-0 h-[2px] w-full overflow-hidden">
+              <div className="absolute top-[-18px] md:top-[-25px] left-0 h-[2px] w-full overflow-hidden">
                 {current === index ? (
                   <motion.div
                     key={`progress-${index}-${tick}`}
@@ -203,7 +203,7 @@ export function HeroSection() {
                 )}
               </div>
 
-              <div className="space-y-1">
+              <div className="space-y-1 hidden sm:block">
                 <span
                   className={cn(
                     "block text-lg font-bold transition-colors",

@@ -5,16 +5,16 @@ import { memo } from "react";
 
 const OurStory = () => {
   return (
-    <div className="flex items-end gap-[100px] w-full h-full mt-[156px] mb-[156px]">
-      <div className=" flex flex-col gap-[20px]">
-        <h3 className="text-[26px]  text-text-base uppercase">
+    <div className="flex flex-col lg:flex-row items-start lg:items-end gap-8 lg:gap-[100px] w-full h-full mt-24 mb-24 md:mt-[156px] md:mb-[156px]">
+      <div className="flex flex-col gap-[20px] w-full lg:w-1/2">
+        <h3 className="text-[20px] sm:text-[26px] text-text-base uppercase">
           Streetwear with a Story
         </h3>
-        <h1 className="text-[92px] font-bold text-text-base leading-[1em] uppercase">
+        <h1 className="text-[44px] sm:text-[72px] md:text-[92px] font-bold text-text-base leading-[1.05] uppercase">
           Wear the Movement, Break the Mold.
         </h1>
       </div>
-      <div className=" flex flex-col gap-[20px]">
+      <div className="flex flex-col gap-[20px] w-full lg:w-1/2">
         <p className="text-[18px] font-normal leading-[150%] text-text-secondary ">
           Born from the pulse of the streets, our brand is a tribute to the
           rebels, the dreamers, and the rule-breakers who shape the culture.

@@ -16,7 +16,7 @@ interface ServiceCardProps {
 const services: ServiceCardProps[] = [
   {
     image: "/hero/3.avif",
-    classNameContainer: "col-span-2",
+    classNameContainer: "md:col-span-2",
   },
   {
     title: "Built by the Streets, Made for You",
@@ -38,7 +38,7 @@ const services: ServiceCardProps[] = [
   },
   {
     image: "/services/1.avif",
-    classNameContainer: "col-span-2",
+    classNameContainer: "md:col-span-2",
   },
 ];
 
@@ -46,12 +46,12 @@ const ServiceCard = memo((serviceData: ServiceCardProps) => {
   return (
     <div
       style={{ backgroundColor: serviceData?.bgColor }}
-      className={`${serviceData.classNameContainer} rounded-2xl  flex gap-[20px] flex-col cursor-pointer group`}
+      className={`${serviceData.classNameContainer} rounded-2xl flex gap-[20px] flex-col cursor-pointer group`}
     >
       {serviceData.image && (
-        <div className="overflow-hidden rounded-[30px]">
+        <div className="overflow-hidden rounded-[30px] w-full">
           <img
-            className="h-[500px] w-full object-cover group-hover:scale-105 transition-all duration-700 ease-in-out"
+            className="h-[350px] sm:h-[450px] md:h-[500px] w-full object-cover group-hover:scale-105 transition-all duration-700 ease-in-out"
             loading="lazy"
             src={serviceData.image}
             alt={serviceData.image}
@@ -64,33 +64,33 @@ const ServiceCard = memo((serviceData: ServiceCardProps) => {
           style={{ justifyContent: "end" }}
           className={`flex flex-col gap-[7px] w-full h-full ${serviceData.classNameContent}`}
         >
-          <h3 className="text-[30px]  font-bold">{serviceData.title}</h3>
-          <p className="text-[18px]  leading-[150%]  font-normal w-[95%]">
+          <h3 className="text-[26px] sm:text-[30px] font-bold">{serviceData.title}</h3>
+          <p className="text-[16px] sm:text-[18px] leading-[150%] font-normal w-[95%]">
             {serviceData.description}
           </p>
 
           <Button
-            className={`${serviceData.classNameContent == "text-white" ? "bg-white text-black" : "text-white bg-black"} relative border-0 outline-none overflow-hidden  rounded-full px-5 py-2 mt-3 w-fit flex items-center gap-3 text-base font-medium group cursor-pointer`}
+            className={`${serviceData.classNameContent == "text-white" ? "bg-white text-black" : "text-white bg-black"} relative border-0 outline-none overflow-hidden rounded-full px-5 py-2 mt-3 w-fit flex items-center gap-3 text-base font-medium group cursor-pointer`}
           >
             {/* Animated Background */}
             <span
-              className={`${serviceData.classNameContent == "text-white" ? "bg-[#292929]" : "bg-white"} absolute inset-0  scale-x-0 origin-left transition-transform duration-700 ease-out group-hover:scale-x-100 rounded-full`}
+              className={`${serviceData.classNameContent == "text-white" ? "bg-[#292929]" : "bg-white"} absolute inset-0 scale-x-0 origin-left transition-transform duration-700 ease-out group-hover:scale-x-100 rounded-full`}
             />
 
             {/* Content */}
             <span
-              className={`${serviceData.classNameContent == "text-white" ? "text-black group-hover:text-white" : "text-white group-hover:text-black"} relative z-10 transition-colors duration-500 `}
+              className={`${serviceData.classNameContent == "text-white" ? "text-black group-hover:text-white" : "text-white group-hover:text-black"} relative z-10 transition-colors duration-500`}
             >
               {serviceData.buttonText}
             </span>
 
             {/* Arrow */}
             <div
-              className={`${serviceData.classNameContent == "text-white" ? "bg-[#292929]" : "bg-white"} relative z-10  rounded-full p-2 transition-all duration-500   `}
+              className={`${serviceData.classNameContent == "text-white" ? "bg-[#292929]" : "bg-white"} relative z-10 rounded-full p-2 transition-all duration-500`}
             >
               <HugeiconsIcon
                 icon={ArrowRight01Icon}
-                className={`${serviceData.classNameContent == "text-white" ? "text-white group-hover:text-white" : "text-black group-hover:text-black"}  w-4 h-4 transition-colors duration-500`}
+                className={`${serviceData.classNameContent == "text-white" ? "text-white group-hover:text-white" : "text-black group-hover:text-black"} w-4 h-4 transition-colors duration-500`}
                 strokeWidth={2}
               />
             </div>
@@ -105,19 +105,19 @@ ServiceCard.displayName = "ServiceCard";
 
 const ShipYourWebsite = () => {
   return (
-    <div className="w-full h-full mt-[86px] mb-[36px]">
-      <div className="w-[60%]">
-        <h3 className="text-[45px] font-bold text-text-base uppercase">
+    <div className="w-full h-full mt-12 mb-10 md:mt-[86px] md:mb-[36px]">
+      <div className="w-full md:w-[60%]">
+        <h3 className="text-[32px] sm:text-[45px] font-bold text-text-base uppercase">
           Ship Your Website Quickly with Frameblox
         </h3>
-        <p className="text-[18px] font-normal leading-[150%] text-text-secondary w-full mt-4">
+        <p className="text-[16px] sm:text-[18px] font-normal leading-[150%] text-text-secondary w-full mt-4">
           Use prebuilt templates and components for a professional, stunning
           look. Save time and focus on content with our user-friendly,
           customizable design solutions.
         </p>
       </div>
 
-      <div className="grid sm:grid-cols-1 md:grid-cols-3 sm:gap-5 gap-3 mt-10">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-10">
         {services.map((service, index) => (
           <ServiceCard key={`${service.title}-${index}`} {...service} />
         ))}

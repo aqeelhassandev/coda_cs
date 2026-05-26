@@ -15,11 +15,11 @@ export const ShowProduct = () => {
   const [activeImage, setActiveImage] = useState(productImages[0]);
 
   return (
-    <div className="bg-black w-full">
-      <div className="mx-auto w-[1200px] py-[100px] grid grid-cols-2 gap-20 items-center">
+    <div className="bg-black w-full overflow-hidden">
+      <div className="mx-auto w-full max-w-[1200px] px-6 py-[60px] md:py-[100px] grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-20 items-center">
         {/* Left Column: Content */}
         <div className="flex flex-col justify-center">
-          <h2 className="text-white text-[80px] lg:text-[88px] font-black uppercase tracking-tight leading-[0.95] mb-6">
+          <h2 className="text-white text-[56px] sm:text-[72px] md:text-[80px] lg:text-[88px] font-black uppercase tracking-tight leading-[0.95] mb-6">
             Nightfall
             <br />
             Oversized
@@ -60,9 +60,9 @@ export const ShowProduct = () => {
         </div>
 
         {/* Right Column: Gallery */}
-        <div className="flex flex-col">
+        <div className="flex flex-col w-full">
           {/* Main Image */}
-          <div className="relative aspect-[4/5] h-160 w-full overflow-hidden rounded-[32px] bg-neutral-950 shadow-2xl">
+          <div className="relative aspect-[4/5] h-[400px] sm:h-[500px] md:h-160 w-full overflow-hidden rounded-[32px] bg-neutral-950 shadow-2xl">
             <AnimatePresence mode="wait">
               <motion.img
                 key={activeImage}
