@@ -1,4 +1,4 @@
-import { memo } from "react";
+import { memo, useRef } from "react";
 import { HugeiconsIcon } from "@hugeicons/react";
 import {
   DeliveryTruck01Icon,
@@ -6,9 +6,24 @@ import {
   InboxIcon,
   HelpCircleIcon,
 } from "@hugeicons/core-free-icons";
-import { motion } from "framer-motion";
+import { motion, useScroll, useSpring } from "framer-motion";
 
 const WhyShop = () => {
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  // Track scroll position of the section
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start end", "end start"],
+  });
+
+  // Smooth out drawing speed
+  const pathLength = useSpring(scrollYProgress, {
+    stiffness: 85,
+    damping: 25,
+    restDelta: 0.001,
+  });
+
   const items = [
     {
       icon: DeliveryTruck01Icon,
@@ -31,14 +46,34 @@ const WhyShop = () => {
     {
       icon: HelpCircleIcon,
       title: "24/7 SUPPORT",
-      description:
-        "Got questions? Our team is here for you anytime, anywhere.",
+      description: "Got questions? Our team is here for you anytime, anywhere.",
     },
   ];
 
   return (
-    <div className="w-full border-t border-neutral-100 py-20 mt-12 mb-12">
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
+    <div
+      ref={containerRef}
+      className="w-full border-t border-neutral-100 py-20 pt-12 mb-12 relative overflow-hidden"
+    >
+      {/* Background SVG path drawing from top-left to bottom-right (Zigzag Pattern) */}
+      <svg
+        className="absolute -inset-2 w-full h-full pointer-events-none text-neutral-200 dark:text-neutral-900"
+        preserveAspectRatio="none"
+        viewBox="0 0 100 100"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <motion.path
+          d="M 0,0 C 30,10 50,10 40,20 C 30,30 5,30 15,40 C 25,50 80,50 70,60 C 60,70 30,70 40,80 C 50,90 80,90 100,100"
+          stroke="currentColor"
+          strokeWidth="2.5"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          style={{ pathLength }}
+        />
+      </svg>
+
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start relative z-10">
         {/* Left Column: Heading and Description */}
         <div className="lg:col-span-5 flex flex-col gap-6">
           <h2 className="text-[52px] md:text-[60px] font-black leading-[1.05] uppercase tracking-tight text-text-base relative">

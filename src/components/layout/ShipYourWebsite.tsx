@@ -2,6 +2,7 @@ import { Button } from "@base-ui/react/button";
 import { ArrowRight01Icon } from "@hugeicons/core-free-icons";
 import { HugeiconsIcon } from "@hugeicons/react";
 import { memo } from "react";
+import { motion } from "framer-motion";
 
 interface ServiceCardProps {
   image?: string;
@@ -42,9 +43,29 @@ const services: ServiceCardProps[] = [
   },
 ];
 
+const staggerContainer = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.1,
+    },
+  },
+};
+
+const fadeInUp = {
+  hidden: { opacity: 0, y: 40 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.6, ease: [0.215, 0.61, 0.355, 1] },
+  },
+};
+
 const ServiceCard = memo((serviceData: ServiceCardProps) => {
   return (
-    <div
+    <motion.div
+      variants={fadeInUp}
       style={{ backgroundColor: serviceData?.bgColor }}
       className={`${serviceData.classNameContainer} rounded-2xl flex gap-[20px] flex-col cursor-pointer group`}
     >
@@ -64,7 +85,9 @@ const ServiceCard = memo((serviceData: ServiceCardProps) => {
           style={{ justifyContent: "end" }}
           className={`flex flex-col gap-[7px] w-full h-full ${serviceData.classNameContent}`}
         >
-          <h3 className="text-[26px] sm:text-[30px] font-bold">{serviceData.title}</h3>
+          <h3 className="text-[26px] sm:text-[30px] font-bold">
+            {serviceData.title}
+          </h3>
           <p className="text-[16px] sm:text-[18px] leading-[150%] font-normal w-[95%]">
             {serviceData.description}
           </p>
@@ -97,7 +120,7 @@ const ServiceCard = memo((serviceData: ServiceCardProps) => {
           </Button>
         </div>
       )}
-    </div>
+    </motion.div>
   );
 });
 
@@ -105,8 +128,14 @@ ServiceCard.displayName = "ServiceCard";
 
 const ShipYourWebsite = () => {
   return (
-    <div className="w-full h-full mt-12 mb-10 md:mt-[86px] md:mb-[36px]">
-      <div className="w-full md:w-[60%]">
+    <motion.div
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, margin: "-100px" }}
+      variants={staggerContainer}
+      className="w-full h-full mt-12 mb-10 md:mt-[86px] md:mb-[36px]"
+    >
+      <motion.div variants={fadeInUp} className="w-full md:w-[60%]">
         <h3 className="text-[32px] sm:text-[45px] font-bold text-text-base uppercase">
           Ship Your Website Quickly with Frameblox
         </h3>
@@ -115,14 +144,14 @@ const ShipYourWebsite = () => {
           look. Save time and focus on content with our user-friendly,
           customizable design solutions.
         </p>
-      </div>
+      </motion.div>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-10">
         {services.map((service, index) => (
           <ServiceCard key={`${service.title}-${index}`} {...service} />
         ))}
       </div>
-    </div>
+    </motion.div>
   );
 };
 

@@ -2,6 +2,7 @@ import { memo } from "react";
 import { Carousel, CarouselContent, useCarousel } from "../ui/carousel";
 import { HugeiconsIcon } from "@hugeicons/react";
 import { ArrowLeft01Icon, ArrowRight01Icon } from "@hugeicons/core-free-icons";
+import { motion } from "framer-motion";
 
 interface ProductCardProps {
   productName: string;
@@ -42,6 +43,15 @@ const product: ProductCardProps[] = [
   },
 ];
 
+const fadeInUp = {
+  hidden: { opacity: 0, y: 40 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.6, ease: [0.215, 0.61, 0.355, 1] },
+  },
+};
+
 const ProductCard = memo((productData: ProductCardProps) => {
   return (
     <div className="relative overflow-hidden rounded-[30px] cursor-pointer group  h-[720px] w-[450px] shrink-0  snap-center flex flex-col justify-end">
@@ -78,14 +88,22 @@ const CarouselControls = () => {
         className="flex items-center justify-center w-12 h-12 rounded-full bg-black text-white hover:bg-black/85 active:scale-95 transition-all duration-200 cursor-pointer shadow-md"
         aria-label="Previous slide"
       >
-        <HugeiconsIcon icon={ArrowLeft01Icon} strokeWidth={2.5} className="w-6 h-6" />
+        <HugeiconsIcon
+          icon={ArrowLeft01Icon}
+          strokeWidth={2.5}
+          className="w-6 h-6"
+        />
       </button>
       <button
         onClick={scrollNext}
         className="flex items-center justify-center w-12 h-12 rounded-full bg-black text-white hover:bg-black/85 active:scale-95 transition-all duration-200 cursor-pointer shadow-md"
         aria-label="Next slide"
       >
-        <HugeiconsIcon icon={ArrowRight01Icon} strokeWidth={2.5} className="w-6 h-6" />
+        <HugeiconsIcon
+          icon={ArrowRight01Icon}
+          strokeWidth={2.5}
+          className="w-6 h-6"
+        />
       </button>
     </div>
   );
@@ -93,8 +111,20 @@ const CarouselControls = () => {
 
 const Featured = () => {
   return (
-    <div className="w-full h-full mt-[106px] mb-[36px]">
-      <div className="mx-auto w-full max-w-[1200px] flex gap-[20px] flex-col px-4 sm:px-6">
+    <motion.div
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, margin: "-100px" }}
+      variants={{
+        hidden: { opacity: 0 },
+        visible: { opacity: 1, transition: { staggerChildren: 0.15 } },
+      }}
+      className="w-full h-full mt-[106px] mb-[36px]"
+    >
+      <motion.div
+        variants={fadeInUp}
+        className="mx-auto w-full max-w-[1200px] flex gap-[20px] flex-col px-4 sm:px-6"
+      >
         <h3 className="text-[28px] sm:text-[40px] font-bold text-text-base uppercase w-full md:w-[70%]">
           Featured Drops: Stand Out, Stay Ahead
         </h3>
@@ -102,21 +132,23 @@ const Featured = () => {
           Exclusive designs, premium materials, and street-ready vibes—these
           must-have pieces are setting the trend. Get yours before they’re gone!
         </p>
-      </div>
-      <Carousel
-        opts={{
-          loop: true,
-        }}
-        className=" mt-7 pl-2"
-      >
-        <CarouselContent className="gap-5 p-4">
-          {product.map((productData) => (
-            <ProductCard key={productData.productName} {...productData} />
-          ))}
-        </CarouselContent>
-        <CarouselControls />
-      </Carousel>
-    </div>
+      </motion.div>
+      <motion.div variants={fadeInUp}>
+        <Carousel
+          opts={{
+            loop: true,
+          }}
+          className=" mt-7 pl-2"
+        >
+          <CarouselContent className="gap-5 p-4">
+            {product.map((productData) => (
+              <ProductCard key={productData.productName} {...productData} />
+            ))}
+          </CarouselContent>
+          <CarouselControls />
+        </Carousel>
+      </motion.div>
+    </motion.div>
   );
 };
 

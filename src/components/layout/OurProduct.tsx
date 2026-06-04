@@ -1,4 +1,5 @@
 import { memo } from "react";
+import { motion } from "framer-motion";
 
 interface ProductCardProps {
   productName: string;
@@ -39,9 +40,31 @@ const product: ProductCardProps[] = [
   },
 ];
 
+const staggerContainer = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.1,
+    },
+  },
+};
+
+const fadeInUp = {
+  hidden: { opacity: 0, y: 40 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.6, ease: [0.215, 0.61, 0.355, 1] },
+  },
+};
+
 const ProductCard = memo((productData: ProductCardProps) => {
   return (
-    <div className="relative flex gap-[20px] flex-col cursor-pointer group">
+    <motion.div
+      variants={fadeInUp}
+      className="relative flex gap-[20px] flex-col cursor-pointer group"
+    >
       {productData.tag && (
         <div className="absolute top-[20px] left-[20px] z-10 px-[18px] py-[7px] bg-black rounded-[25px] text-[16px] sm:text-[18px] font-bold text-white">
           {productData.tag}
@@ -64,10 +87,12 @@ const ProductCard = memo((productData: ProductCardProps) => {
         </p>
         <h3 className="text-[20px] sm:text-[22px] text-text-base font-bold flex gap-4 items-center ">
           ${productData.productPrice}{" "}
-          <span className="line-through text-text-secondary/50">${productData.productOldPrice}</span>
+          <span className="line-through text-text-secondary/50">
+            ${productData.productOldPrice}
+          </span>
         </h3>
       </div>
-    </div>
+    </motion.div>
   );
 });
 
@@ -75,8 +100,14 @@ ProductCard.displayName = "ProductCard";
 
 const OurProduct = () => {
   return (
-    <div className="w-full h-full mt-10 mb-10 md:mt-[36px] md:mb-[36px]">
-      <div>
+    <motion.div
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, margin: "-100px" }}
+      variants={staggerContainer}
+      className="w-full h-full mt-10 mb-10 md:mt-[36px] md:mb-[36px]"
+    >
+      <motion.div variants={fadeInUp}>
         <h3 className="text-[32px] sm:text-[45px] font-bold text-text-base uppercase">
           new drops
         </h3>
@@ -85,13 +116,13 @@ const OurProduct = () => {
           and street-ready fits. Once they’re gone, they’re gone. Don’t miss
           out!
         </p>
-      </div>
+      </motion.div>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-10">
         {product.map((productData) => (
           <ProductCard key={productData.productName} {...productData} />
         ))}
       </div>
-    </div>
+    </motion.div>
   );
 };
 
